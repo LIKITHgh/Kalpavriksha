@@ -36,7 +36,7 @@ int main() {
             case 2: displayUsers(); break;
             case 3: updateUser(); break;
             case 4: deleteUser(); break;
-            case 5: exit(0);
+            case 5: return 0;
             default: printf("Invalid choice! Try again.\n");
         }
     }
@@ -61,12 +61,17 @@ void addUser() {
         return;
     }
 
-    printf("Enter ID: ");
-    scanf("%d", &u.id);
-    printf("Enter Name: ");
-    scanf(" %[^\n]", u.name); 
-    printf("Enter Age: ");
-    scanf("%d", &u.age);
+printf("Enter ID: ");
+scanf("%d", &u.id);
+int c;
+while ((c = getchar()) != '\n' && c != EOF);
+printf("Enter Name: ");
+fgets(u.name, sizeof(u.name), stdin);
+u.name[strcspn(u.name, "\n")] = '\0';
+printf("Enter Age: ");
+scanf("%d", &u.age);
+while ((c = getchar()) != '\n' && c != EOF);
+
 
     fprintf(file, "%d %s %d\n", u.id, u.name, u.age);
     fclose(file);
@@ -102,7 +107,7 @@ void updateUser() {
     }
 
     printf("Enter ID to update: ");
-    scanf("%d", &id);
+    fscanf("%d", &id);
 
     while (fscanf(file, "%d %s %d", &u.id, u.name, &u.age) != EOF) {
         if (u.id == id) {
