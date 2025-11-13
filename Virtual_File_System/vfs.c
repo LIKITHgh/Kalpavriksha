@@ -32,8 +32,6 @@ int freeCount = 0;
 FileNode *root = NULL;
 FileNode *cwd = NULL;
 
-/* -------------------- Free List Functions -------------------- */
-
 void addBlockTail(int index) {
     FreeBlock *node = malloc(sizeof(FreeBlock));
     node->idx = index;
@@ -73,8 +71,6 @@ void freeBlocks(int *arr, int n) {
         addBlockTail(arr[i]);
     }
 }
-
-/* -------------------- File System Functions -------------------- */
 
 FileNode *newNode(char *name, bool isDir, FileNode *parent) {
     FileNode *n = calloc(1, sizeof(FileNode));
@@ -124,8 +120,6 @@ void removeChild(FileNode *n) {
         n->next->prev = n->prev;
     }
 }
-
-/* -------------------- Commands -------------------- */
 
 void mkdirCmd(char *name) {
     if (find(cwd, name) != NULL) {
@@ -262,8 +256,6 @@ void pwdCmd(FileNode *n) {
 void dfCmd() {
     printf("Free: %d  Used: %d\n", freeCount, NUM_BLOCKS - freeCount);
 }
-
-/* -------------------- Main -------------------- */
 
 int main() {
     for (int i = 0; i < NUM_BLOCKS; i++) {
