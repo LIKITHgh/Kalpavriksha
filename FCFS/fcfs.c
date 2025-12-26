@@ -2,17 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Simple Process structure (PCB-like)
 struct Process {
     char name[20];
     int pid;
     int burst;
-    int io_start;     // not used in this beginner version
-    int io_dur;       // not used in this beginner version
+    int io_start;    
+    int io_dur;       
     struct Process *next;
 };
 
-// Simple queue for FCFS
 struct Process *front = NULL;
 struct Process *rear = NULL;
 
